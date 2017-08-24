@@ -16,10 +16,10 @@ var Nav = React.createClass({
                  <ul className="dropdown menu" data-dropdown-menu>
                   <li className="menu-text">React Timer App</li>
                   <li>
-                      <IndexLink to='/' activeClassName='active'>Timer</IndexLink>
+                      <IndexLink to='/' activeClassName='active'>Countdown</IndexLink>
                   </li>
                   <li>
-                      <Link to='countdown' activeClassName='active'>Countdown</Link>
+                      <Link to='/timer' activeClassName='active'>Timer</Link>
                   </li>
                 </ul>
               </div>

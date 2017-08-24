@@ -27,6 +27,7 @@ module.exports = {
             Timer: 'src/components/Timer.jsx',
             Countdown: 'src/components/Countdown.jsx',
             Clock: 'src/components/Clock.jsx',
+            SecondsInputForm: 'src/components/SecondsInputForm.jsx',
         },
         extensions: ['', '.js', '.jsx']
     },
@@ -39,5 +40,6 @@ module.exports = {
             test: /\.jsx?$/,
             exclude: /(node_modules|bower_components)/
         }]
-    }
+    },
+    devtool: 'inline-source-map'
 };
