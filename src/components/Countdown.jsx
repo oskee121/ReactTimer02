@@ -18,12 +18,8 @@ const Countdown = React.createClass({
         return (
             <div>
                 <h2>Countdown</h2>
-                <div className="row">
-                    <div className="small-3 small-centered columns">
-                        <Clock totalSeconds={this.state.count}/>
-                        <SecondsInputForm onSubmitHandler={this.onSecondsInputFormSubmit}/>
-                    </div>
-                </div>
+                <Clock totalSeconds={this.state.count}/>
+                <SecondsInputForm onSubmitHandler={this.onSecondsInputFormSubmit}/>
             </div>
         )
     }
