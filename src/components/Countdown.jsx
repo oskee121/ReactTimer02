@@ -3,16 +3,45 @@ const Clock = require('Clock');
 const SecondsInputForm = require('SecondsInputForm');
 
 const Countdown = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
-            count: 0
+            count: 0,
+            status: 'stopped'
         };
     },
+    componentDidUpdate: function (prevProps, prevState) {
+        if (this.state.status !== prevState.status) {
+            switch (this.state.status) {
+                case 'started':
+                    console.log('componentDidUpdate::started');
+                    this.startTimer();
+                    break;
+                default:
+                    console.log('clear timeout');
+                    clearInterval(this.timer);
+            }
+        }
+    },
     onSecondsInputFormSubmit: function (seconds) {
-        console.log(seconds);
         this.setState({
-            count: seconds
+            count: seconds,
+            status: 'started'
         });
+    },
+    startTimer() {
+        this.timer = setInterval(() => {
+            console.log('exec for setInterval 1 sec');
+            var nextCount = this.state.count - 1;
+            if (nextCount <= 0) {
+                this.setState({
+                    count: 0,
+                    status: 'stopped'
+                });
+            }
+            this.setState({
+                count: nextCount >= 0 ? nextCount : 0
+            });
+        }, 1000);
     },
     render() {
         return (
