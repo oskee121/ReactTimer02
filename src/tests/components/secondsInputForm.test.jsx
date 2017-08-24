@@ -23,4 +23,19 @@ describe('SecondsInputForm', () => {
 
         expect(spy).toHaveBeenCalledWith(109);
     });
+    it('should not been call onSubmitHandler because of invalid input', () => {
+        var invalid = ['', 'a'];
+
+        var spy = expect.createSpy();
+        var inputForm = TestUtils.renderIntoDocument(<SecondsInputForm onSubmitHandler={spy}/>);
+        var $element = $(ReactDOM.findDOMNode(inputForm));
+
+        invalid.forEach(function (item) {
+            console.log('test using: "' + item + '"');
+            inputForm.refs.seconds.value = item;
+            TestUtils.Simulate.submit($element.find('form')[0]);
+
+            expect(spy).toNotHaveBeenCalled();
+        })
+    });
 })
