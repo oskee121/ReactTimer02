@@ -13,11 +13,9 @@ const Countdown = React.createClass({
         if (this.state.status !== prevState.status) {
             switch (this.state.status) {
                 case 'started':
-                    console.log('componentDidUpdate::started');
                     this.startTimer();
                     break;
                 default:
-                    console.log('clear timeout');
                     clearInterval(this.timer);
             }
         }
@@ -30,7 +28,6 @@ const Countdown = React.createClass({
     },
     startTimer() {
         this.timer = setInterval(() => {
-            console.log('exec for setInterval 1 sec');
             var nextCount = this.state.count - 1;
             if (nextCount <= 0) {
                 this.setState({

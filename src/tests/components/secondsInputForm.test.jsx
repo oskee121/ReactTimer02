@@ -31,7 +31,6 @@ describe('SecondsInputForm', () => {
         var $element = $(ReactDOM.findDOMNode(inputForm));
 
         invalid.forEach(function (item) {
-            console.log('test using: "' + item + '"');
             inputForm.refs.seconds.value = item;
             TestUtils.Simulate.submit($element.find('form')[0]);
 
