@@ -9,12 +9,11 @@ const Timer = React.createClass({
         };
     },
     onSecondsInputFormSubmit: function (seconds) {
-        console.log(seconds);
         this.setState({
             count: seconds
         });
     },
-    render () {
+    render: function() {
         return (
             <div>
                 <h2>Timer</h2>

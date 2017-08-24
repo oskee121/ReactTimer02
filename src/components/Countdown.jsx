@@ -1,4 +1,4 @@
-var React = require('react');
+import React, { PropTypes } from 'react'
 const Clock = require('Clock');
 const SecondsInputForm = require('SecondsInputForm');
 
@@ -26,7 +26,7 @@ const Countdown = React.createClass({
             status: 'started'
         });
     },
-    startTimer() {
+    startTimer : function() {
         this.timer = setInterval(() => {
             var nextCount = this.state.count - 1;
             if (nextCount <= 0) {
@@ -40,7 +40,7 @@ const Countdown = React.createClass({
             });
         }, 1000);
     },
-    render() {
+    render: function() {
         return (
             <div>
                 <h2>Countdown</h2>

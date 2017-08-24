@@ -1,6 +1,4 @@
-import React, {
-    PropTypes
-} from 'react'
+import React, { PropTypes } from 'react'
 
 const SecondsInputForm = React.createClass({
     onSubmit: function (e) {
@@ -10,7 +8,7 @@ const SecondsInputForm = React.createClass({
             this.props.onSubmitHandler(parseInt(totalSeconds, 10));
         }
     },
-    render() {
+    render: function() {
         return (
             <div className="seconds-input-form-parent">
                 <form ref="form" onSubmit={this.onSubmit} className="seconds-input-form">
