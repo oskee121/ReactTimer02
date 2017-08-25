@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 const Clock = require('Clock');
 const SecondsInputForm = require('SecondsInputForm');
+const Controls = require('Controls');
 
 const Countdown = React.createClass({
     getInitialState: function () {
@@ -15,8 +16,16 @@ const Countdown = React.createClass({
                 case 'started':
                     this.startTimer();
                     break;
-                default:
+                case 'stopped':
                     clearInterval(this.timer);
+                    this.setState({
+                        count: 0
+                    });
+                    break;
+                case 'paused':
+                    clearInterval(this.timer);
+                    break;
+                default:
             }
         }
     },
@@ -40,12 +49,25 @@ const Countdown = React.createClass({
             });
         }, 1000);
     },
+    onStatusChange: function (newStatus) {
+        this.setState({
+            status: newStatus
+        });
+    },
     render: function() {
+        var {count, status} = this.state;
+        var renderControlsArea = () => {
+            if(status !== 'stopped') {
+                return <Controls countdownStatus={status} onStatusChange={this.onStatusChange}/>
+            } else {
+                return <SecondsInputForm onSubmitHandler={this.onSecondsInputFormSubmit}/>
+            }
+        }
         return (
             <div>
                 <h2>Countdown</h2>
                 <Clock totalSeconds={this.state.count}/>
-                <SecondsInputForm onSubmitHandler={this.onSecondsInputFormSubmit}/>
+                {renderControlsArea()}
             </div>
         )
     }
