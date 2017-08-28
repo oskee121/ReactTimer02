@@ -1,11 +1,13 @@
 import React, { PropTypes } from 'react'
 const Clock = require('Clock');
 const SecondsInputForm = require('SecondsInputForm');
+const Controls = require('Controls');
 
 const Timer = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
-            count: 0
+            count: 0,
+            status: 'stopped'
         };
     },
     onSecondsInputFormSubmit: function (seconds) {
@@ -13,7 +15,21 @@ const Timer = React.createClass({
             count: seconds
         });
     },
-    render: function() {
+    handleStatusChange: function (newStatus) {
+        console.log(newStatus);
+        this.setState({
+            status: newStatus
+        });
+        this.counter = setInterval(() => {
+            var { count } = this.state;
+            let newCount = count + 1;
+            this.setState({
+                count: newCount
+            });
+        }, 1000);
+    },
+    render: function () {
+        var { count, status } = this.state;
         // var renderControlsArea = () => {
         //     if(status !== 'stopped') {
         //         return
@@ -25,7 +41,7 @@ const Timer = React.createClass({
             <div>
                 <h2>Timer</h2>
                 <Clock totalSeconds={this.state.count}/>
-                <Controls countdownStatus={status} onStatusChange={this.onStatusChange} controlsType="timer"/>
+                <Controls status={status} onStatusChange={this.handleStatusChange} controlsType="timer"/>
             </div>
         )
     }
