@@ -14,11 +14,18 @@ const Timer = React.createClass({
         });
     },
     render: function() {
+        // var renderControlsArea = () => {
+        //     if(status !== 'stopped') {
+        //         return
+        //     } else {
+        //         return <SecondsInputForm onSubmitHandler={this.onSecondsInputFormSubmit}/>
+        //     }
+        // }
         return (
             <div>
                 <h2>Timer</h2>
                 <Clock totalSeconds={this.state.count}/>
-                <SecondsInputForm onSubmitHandler={this.onSecondsInputFormSubmit}/>
+                <Controls countdownStatus={status} onStatusChange={this.onStatusChange} controlsType="timer"/>
             </div>
         )
     }

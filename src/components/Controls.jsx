@@ -3,7 +3,8 @@ import React, { PropTypes } from 'react'
 var Controls = React.createClass({
     propTypes: {
         countdownStatus: PropTypes.string.isRequired,
-        onStatusChange: PropTypes.func.isRequired
+        onStatusChange: PropTypes.func.isRequired,
+        controlsType: PropTypes.string.isRequired
     },
     onStatusChange: function (newStatus) {
         return () => {
@@ -11,18 +12,43 @@ var Controls = React.createClass({
         }
     },
     render: function () {
-        var {countdownStatus} = this.props;
-        let renderStartStopButton = () => {
-            if (countdownStatus === 'paused') {
-                return <button className="button primary" onClick={this.onStatusChange("started")}>Start</button>
-            } else if (countdownStatus === 'started') {
-                return <button className="button secondary" onClick={this.onStatusChange("paused")}>Pause</button>
+        let {controlsType} = this.props;
+        let renderControlsArea = () => {
+            let {countdownStatus} = this.props;
+            if (controlsType === 'countdown') {
+                let renderStartStopButton = () => {
+                    if (countdownStatus === 'paused') {
+                        return <button className="button primary" onClick={this.onStatusChange("started")}>Start</button>
+                    } else if (countdownStatus === 'started') {
+                        return <button className="button secondary" onClick={this.onStatusChange("paused")}>Pause</button>
+                    }
+                }
+                return (
+                    <div>
+                        {renderStartStopButton()}
+                        <button className="button alert hollow" onClick={this.onStatusChange("stopped")}>Clear</button>
+                    </div>
+                )
+            } else if (controlsType === 'timer') {
+                if (timerStatus === 'stopped') {
+                    return (
+                        <span>
+                            <button className="button primary" onClick={this.onStatusChange("started")}>Start</button>
+                        </span>
+                    )
+                } else if (timerStatus === 'started') {
+                    return (
+                        <span>
+                            <button className="button secondary" onClick={this.onStatusChange("paused")}>Pause</button>
+                            <button className="button alert hollow" onClick={this.onStatusChange("stopped")}>Stop</button>
+                        </span>
+                    )
+                }
             }
         }
         return (
-            <div className="controls">
-                {renderStartStopButton()}
-                <button className="button alert hollow" onClick={this.onStatusChange("stopped")}>Clear</button>
+            <div className={`controls ${controlsType}`}>
+                {renderControlsArea()}
             </div>
         );
     }
